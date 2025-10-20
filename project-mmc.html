@@ -51,9 +51,9 @@
       </p>
       <ul>
         <li><strong>Limits:</strong> <span style="font-family: monospace;">Vac ≤ m·Vdc·√(3/8)</span>, <span style="font-family: monospace;">Vdc ≥ Vac·√(8/3)/m</span> (m=1), and fixed circle <span style="font-family: monospace;">P²+Q² ≤ |S|²</span>.</li>
-        <li><strong>Boundary search:</strong> θ∈[0°,360°]에서 |S|을 증가시키며 전압/전류 한계 충돌 시점을 이분법으로 정밀화, V‑제한(자홍)/C‑제한(적색) 구간 태깅.</li>
-        <li><strong>Waveforms:</strong> 필터(R,L) 포함한 PCC 전압·전류 합성, 팔 전류/전압 및 능동전력 계산.</li>
-        <li><strong>SM 커패시터:</strong> <span style="font-family: monospace;">E += P·Δt</span>, <span style="font-family: monospace;">V = √(2E/(C·N))</span>; 드리프트 옵션으로 장기 불평형 시각화.</li>
+        <li><strong>Boundary search:</strong> For θ in [0°, 360°], the algorithm increases |S| until a voltage or current limit is hit, then refines the boundary point via bisection; segments are tagged voltage‑limited (magenta) or current‑limited (red).</li>
+        <li><strong>Waveforms:</strong> (R,L)  PCC · ,  /   .</li>
+        <li><strong>SM :</strong> <span style="font-family: monospace;">E += P·Δt</span>, <span style="font-family: monospace;">V = √(2E/(C·N))</span>;     .</li>
       </ul>
     </section>
 
