@@ -2,42 +2,220 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Project – Woo Jin, An</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Steady-state analysis tool for Modular Multilevel Converters (MMC) in VSC-HVDC systems. MATLAB GUI project by Woo Jin, An at Imperial College London." />
+  <link rel="canonical" href="https://example.com/project" />
+  <meta property="og:title" content="Steady-State Analysis Tool for MMCs in VSC-HVDC" />
+  <meta property="og:description" content="MATLAB GUI tool modeling MMC steady-state dynamics, P–Q boundaries, and sensitivity analyses." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com/project" />
+  <meta name="twitter:card" content="summary" />
+  <style>
+    :root {
+      --bg: #0b0c0f;
+      --panel: #121419;
+      --text: #e6e6e6;
+      --muted: #b6b6b6;
+      --link: #7aa2ff;
+      --accent: #65d2b5;
+      color-scheme: dark light;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #ffffff;
+        --panel: #f6f7f9;
+        --text: #1f2329;
+        --muted: #4b5563;
+        --link: #1d4ed8;
+        --accent: #0ea5e9;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html:focus-within { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", Ubuntu, Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container { max-width: 78ch; margin: 0 auto; padding: 1.25rem; }
+
+    header {
+      position: sticky; top: 0; z-index: 10;
+      backdrop-filter: saturate(1.2) blur(8px);
+      background: color-mix(in srgb, var(--bg) 70%, transparent);
+      border-bottom: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+    }
+
+    nav a {
+      display: inline-block;
+      margin-right: .75rem;
+      padding: .5rem .75rem;
+      border-radius: .75rem;
+      text-decoration: none;
+      color: var(--link);
+    }
+    nav a:focus, nav a:hover { outline: none; background: color-mix(in srgb, var(--link) 12%, transparent); }
+
+    h1 { font-size: clamp(1.6rem, 1.2rem + 2vw, 2.25rem); margin: 0; }
+    h2 { font-size: clamp(1.25rem, 1.05rem + 1vw, 1.6rem); }
+    h3 { font-size: 1.1rem; color: var(--muted); }
+
+    main { padding-block: 1rem 3rem; }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      box-shadow: 0 1px 0 rgba(0,0,0,.08), 0 12px 24px rgba(0,0,0,.06);
+    }
+
+    .meta {
+      display: grid; gap: .35rem;
+      font-size: .95rem; color: var(--muted);
+    }
+
+    a { color: var(--link); }
+    a:focus { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: .5rem; }
+
+    ul { padding-left: 1.15rem; }
+    li { margin-block: .25rem; }
+
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+    footer { border-top: 1px dashed color-mix(in srgb, var(--text) 10%, transparent); font-size: .95rem; color: var(--muted); }
+
+    .skip-link {
+      position: absolute; left: -999px; top: auto; width: 1px; height: 1px; overflow: hidden;
+    }
+    .skip-link:focus {
+      left: 1rem; top: 1rem; width: auto; height: auto; padding: .5rem .75rem; background: var(--accent); color: #0a0a0a; border-radius: .5rem;
+    }
+
+    /* Print-friendly */
+    @media print {
+      header, nav, footer { display: none; }
+      .panel { border: none; box-shadow: none; }
+      body { background: #fff; color: #111; }
+    }
+  </style>
+  <link rel="preload" as="image" href="/icons/favicon.svg" imagesizes="any" />
+  <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ResearchProject",
+    "name": "Steady-State Analysis Tool for Modular Multilevel Converters in VSC-HVDC Systems",
+    "description": "MATLAB-based GUI tool for steady-state analysis of MMCs in VSC-HVDC systems, including P–Q operating regions and parametric sensitivity.",
+    "url": "https://example.com/project",
+    "creator": {
+      "@type": "Person",
+      "name": "Woo Jin, An"
+    },
+    "supervisor": {
+      "@type": "Person",
+      "name": "Dr. Adria Junyent-Ferre",
+      "url": "https://profiles.imperial.ac.uk/adria.junyent-ferre"
+    },
+    "isAccessibleForFree": true,
+    "keywords": ["MMC", "VSC-HVDC", "Power Electronics", "MATLAB", "GUI", "Converter Modeling"],
+    "temporalCoverage": "2025-01-01/Present"
+  }
+  </script>
 </head>
 <body>
-  <header>
-    <h1>Project</h1>
-    <nav>
-      <a href="index.html">Home</a>
-    </nav>
+  <a class="skip-link" href="#content">Skip to main content</a>
+  <header role="banner">
+    <div class="container" aria-label="Page header">
+      <h1>Project</h1>
+      <nav aria-label="Primary">
+        <a href="index.html">Home</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section>
-      <h2>Steady-State Analysis Tool for Modular Multilevel Converters in VSC-HVDC Systems (On-going)</h2>
-      <p><strong>Institution:</strong> Imperial College London<br>
-         <strong>Supervisor:</strong> <a href="https://profiles.imperial.ac.uk/adria.junyent-ferre" target="_blank" rel="noopener noreferrer">Dr. Adria Junyent-Ferre</a><br>
-         <strong>Tools & Techniques:</strong> MATLAB, GUI Development, Converter Modeling, Signal Processing, Power Electronics</p>
+  <main id="content" class="container" role="main">
+    <article class="panel" itemscope itemtype="https://schema.org/ResearchProject">
+      <header>
+        <h2 itemprop="name">Steady-State Analysis Tool for Modular Multilevel Converters in VSC-HVDC Systems <span aria-hidden="true">(On‑going)</span></h2>
+        <p class="sr-only" aria-live="polite">Status: On-going</p>
+      </header>
 
-      <p>
-        This project developed a MATLAB-based tool for the steady-state analysis of <strong>Modular Multilevel Converters (MMCs)</strong> used in <strong>Voltage Source Converter–High Voltage Direct Current (VSC-HVDC)</strong> systems. The tool allows users to configure converter parameters and visualize key internal dynamics such as arm currents, capacitor voltage ripple, and submodule energy. It also calculates and displays feasible active/reactive power boundaries, supporting converter control design and operating point validation.
+      <section class="meta" aria-label="Project metadata">
+        <div><strong>Institution:</strong> <span itemprop="sourceOrganization">Imperial College London</span></div>
+        <div><strong>Supervisor:</strong> <a itemprop="supervisor" href="https://profiles.imperial.ac.uk/adria.junyent-ferre" target="_blank" rel="noopener noreferrer">Dr. Adria Junyent‑Ferre</a></div>
+        <div><strong>Tools & Techniques:</strong> <span itemprop="keywords">MATLAB, GUI Development, Converter Modeling, Signal Processing, Power Electronics</span></div>
+        <div><strong>Timeline:</strong> <time datetime="2025-01">Jan 2025</time>–<time datetime="9999-12">Present</time></div>
+      </section>
+
+      <p itemprop="description">
+        This project develops a MATLAB-based tool for the steady-state analysis of <strong>Modular Multilevel Converters (MMCs)</strong> used in <strong>Voltage Source Converter–High Voltage Direct Current (VSC-HVDC)</strong> systems. The tool lets users configure converter parameters and visualize internal dynamics such as arm currents, capacitor voltage ripple, and submodule energy. It also computes feasible active/reactive power boundaries (P–Q) to support controller design and operating-point validation.
       </p>
 
       <h3>Key Contributions</h3>
       <ul>
-        <li>Designed and implemented a GUI-based MATLAB tool for steady-state MMC simulation</li>
-        <li>Modeled internal converter behavior including submodule capacitance, circulating currents, and power exchange</li>
-        <li>Enabled parametric sensitivity analysis (e.g., effects of AC-side filter impedance and SM capacitance)</li>
-        <li>Visualized converter P–Q operating regions for assessing steady-state feasibility</li>
-        <li>Established a foundation for future integration of transient and fault-response analysis</li>
+        <li>Designed and implemented a GUI-based MATLAB tool for steady-state MMC analysis.</li>
+        <li>Modeled internal converter behavior including submodule capacitance, circulating currents, and power exchange.</li>
+        <li>Enabled parametric sensitivity studies (e.g., AC-side filter impedance, submodule capacitance).</li>
+        <li>Visualized converter P–Q operating regions for feasibility assessment.</li>
+        <li>Established a foundation for future transient and fault-response analysis.</li>
       </ul>
-    </section>
+
+      <section id="methodology" aria-label="Methodology">
+        <h3>Methodology</h3>
+        <p>This section summarizes how the tool computes steady-state behaviour and the P–Q operating boundary, matching the MATLAB implementation and thesis model.</p>
+        <ol>
+          <li><strong>GUI & State Management.</strong> A persistent <code>handles</code> struct stores UI references and computed data. Debounced callbacks (<code>realTimeUpdate</code>, <code>updateInterval</code>) prevent thrashing during slider drags. Config Save/Load uses MAT files for reproducibility.</li>
+          <li><strong>Safe-Zone Computation.</strong> After any parameter change, <code>updateAllSafeZones</code> recomputes admissible ranges:
+            <ul>
+              <li><em>Voltage headroom</em>: <code>Vac ≤ m·Vdc·√(3/8)</code>, <code>Vdc ≥ Vac·√(8/3)/m</code> (with <code>m=1</code>).</li>
+              <li><em>Fixed-nameplate circle</em>: <code>P²+Q² ≤ |S|²</code>.</li>
+              <li><em>Grid current hint</em>: <code>I_limit = |S|/(√3·Vac)</code> and filter headroom heuristic to set a safe slider band.</li>
+              <li><em>Component heuristics</em> for <code>N</code>, <code>Csm</code>, <code>Larm</code>, <code>Rfilt</code>, <code>Lfilt</code> (loss/voltage-drop bounds).</li>
+            </ul>
+          </li>
+          <li><strong>Waveform Synthesis.</strong> AC side phasors reconstruct PCC voltages/currents from <code>(P,Q)</code> and filter <code>(R,L)</code>. Internal arm waveforms use ideal modulation with arm inductance derivatives applied to voltage equations.</li>
+          <li><strong>Capacitor Model.</strong> Per-arm energy integration (<code>E += P·Δt</code>) maps to equivalent SM voltage <code>V = √(2E/(C·N))</code>. Optional drift injects a small bias to visualize long-term imbalance.</li>
+          <li><strong>P–Q Capability Boundary.</strong> For angles θ∈[0°,360°], the solver increases |S| until either <em>converter voltage</em> or <em>current</em> limit is hit, with bisection refinement. Segments are tagged V-limited (magenta) or C-limited (red). Exportable preview and Excel writer reproduce tables/plots.</li>
+          <li><strong>Validation.</strong> Reference test cases reproduce literature/benchmark behaviours (grid-side magnitudes, arm quantities, boundary shape) under stated assumptions.</li>
+        </ol>
+      </section>
+
+      <section id="demonstration" aria-label="Demonstration">
+        <h3>Demonstration</h3>
+        <p>Below is a short clip showing the live interaction workflow (parameter edits → safe-zone updates → waveforms & P–Q plane refresh). Replace <code>media/mmc-demo.mp4</code> with your exported video file.</p>
+        <figure>
+          <video controls preload="metadata" width="100%" poster="/media/mmc-demo-poster.jpg">
+            <source src="media/mmc-demo.mp4" type="video/mp4" />
+            <p>Your browser does not support the video tag. <a href="media/mmc-demo.mp4">Download the demo</a>.</p>
+          </video>
+          <figcaption>MMC Steady-State Analysis Tool — live GUI interaction and boundary export.</figcaption>
+        </figure>
+        <details>
+          <summary>Suggested clip script (1–2 minutes)</summary>
+          <ul>
+            <li>Start at default: show safe bands on sliders and rated-|S| circle.</li>
+            <li>Drag the operating point across quadrants; point out V-limited vs C-limited segments.</li>
+            <li>Toggle PF (lag/lead), observe Q sign and current update.</li>
+            <li>Change <code>Vac</code>/<code>Vdc</code> to demonstrate headroom constraints.</li>
+            <li>Open <em>Boundary Preview</em>, filter/table colouring, export to Excel.</li>
+            <li>Enable capacitor drift and highlight ripple behaviour.</li>
+            <li>Use <em>POP-OUT</em> plane for large-screen view.</li>
+          </ul>
+        </details>
+      </section>
+
+    </article
   </main>
 
-  <footer>
-    <p>© 2025 Woo Jin, An</p>
+  <footer class="container" role="contentinfo">
+    <p>© <time datetime="2025">2025</time> <span itemprop="author">Woo Jin, An</span></p>
   </footer>
 </body>
 </html>
