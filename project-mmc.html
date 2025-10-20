@@ -25,49 +25,52 @@
 
   <main>
     <section>
-      <h2>Steady‑State Analysis Tool for Modular Multilevel Converters in VSC‑HVDC Systems (On‑going)</h2>
+      <h2>Steady‑State Analysis Tool for Modular Multilevel Converters in VSC‑HVDC Systems (Ongoing)</h2>
       <p><strong>Institution:</strong> Imperial College London<br>
          <strong>Supervisor:</strong> <a href="https://profiles.imperial.ac.uk/adria.junyent-ferre" target="_blank" rel="noopener noreferrer">Dr. Adria Junyent‑Ferre</a><br>
          <strong>Tools & Techniques:</strong> MATLAB, GUI Development, Converter Modeling, Signal Processing, Power Electronics</p>
 
       <p>
-        This project develops a MATLAB‑based tool for the steady‑state analysis of <strong>Modular Multilevel Converters (MMCs)</strong> used in <strong>Voltage Source Converter–High Voltage Direct Current (VSC‑HVDC)</strong> systems. The tool configures converter parameters and visualizes arm currents, capacitor‑voltage ripple, and submodule energy, and computes feasible P–Q operating boundaries for controller design and operating‑point validation.
+        This project develops a MATLAB‑based tool for the steady‑state analysis of <strong>Modular Multilevel Converters (MMCs)</strong> used in <strong>Voltage Source Converter–High Voltage Direct Current (VSC‑HVDC)</strong> systems. The tool lets users configure converter parameters and immediately visualize key internal behaviors such as arm currents, capacitor‑voltage ripple, submodule energy, and grid‑side waveforms. It also computes the feasible active/reactive power (P–Q) operating region to support controller design, operating‑point selection, and engineering validation.
       </p>
 
       <h3>Key Contributions</h3>
       <ul>
-        <li>GUI‑based MATLAB tool for steady‑state MMC analysis</li>
-        <li>Internal behavior modeling: submodule capacitance, circulating currents, power exchange</li>
-        <li>Parametric sensitivity analysis (AC filter impedance, SM capacitance)</li>
-        <li>P–Q operating region visualization with breach tagging</li>
-        <li>Foundation for future transient and fault‑response analysis</li>
+        <li>Designed and implemented a robust, GUI‑based MATLAB application for steady‑state MMC analysis.</li>
+        <li>Modeled internal converter behavior, including submodule capacitance effects, circulating currents, and power exchange between arms and the grid.</li>
+        <li>Enabled parameter sensitivity studies (e.g., AC‑side filter impedance, submodule capacitance, arm inductance) with real‑time feedback.</li>
+        <li>Computed and visualized the converter’s P–Q operating region with clear tagging of voltage‑limited and current‑limited segments.</li>
+        <li>Established a clean interface for future extensions such as transient studies, fault response, and controller‑in‑the‑loop testing.</li>
       </ul>
     </section>
 
     <section>
       <h3>Methodology</h3>
       <p>
-        The solver enforces fixed‑MVA nameplate limits and evaluates voltage/current feasibility per operating angle. After any parameter edit, safe zones are recomputed and the waveforms & P–Q plane refresh in real time.
+        The solver enforces a fixed‑MVA nameplate and evaluates feasibility at each operating angle by checking converter voltage headroom and current limits. After any parameter edit, safe operating ranges are recomputed and the waveforms and P–Q plane update in real time.
       </p>
       <ul>
-        <li><strong>Limits:</strong> <span style="font-family: monospace;">Vac ≤ m·Vdc·√(3/8)</span>, <span style="font-family: monospace;">Vdc ≥ Vac·√(8/3)/m</span> (m=1), and fixed circle <span style="font-family: monospace;">P²+Q² ≤ |S|²</span>.</li>
-        <li><strong>Boundary search:</strong> For θ in [0°, 360°], the algorithm increases |S| until a voltage or current limit is hit, then refines the boundary point via bisection; segments are tagged voltage‑limited (magenta) or current‑limited (red).</li>
-        <li><strong>Waveforms:</strong> (R,L)  PCC · ,  /   .</li>
-        <li><strong>SM :</strong> <span style="font-family: monospace;">E += P·Δt</span>, <span style="font-family: monospace;">V = √(2E/(C·N))</span>;     .</li>
+        <li><strong>Limits:</strong> With modulation index <em>m</em>=1, the voltage constraints are <code>Vac ≤ m·Vdc·√(3/8)</code> and <code>Vdc ≥ Vac·√(8/3)/m</code>. The fixed‑nameplate constraint is <code>P² + Q² ≤ |S|²</code>.</li>
+        <li><strong>Boundary search:</strong> For θ in [0°, 360°], the algorithm increases |S| until a voltage or current limit is reached, then refines the boundary point via bisection. Segments are labeled voltage‑limited (magenta) or current‑limited (red).</li>
+        <li><strong>Waveform synthesis:</strong> Grid‑side voltages and currents at the PCC include the filter (<em>R</em>, <em>L</em>) dynamics. Arm voltages and currents include the arm inductance derivative terms.</li>
+        <li><strong>Submodule capacitors:</strong> Per‑arm energy integration (<code>E ← E + P·Δt</code>) maps to equivalent SM voltage <code>V = √(2E/(C·N))</code>. An optional drift mode injects a small bias to visualize long‑term imbalance.</li>
+        <li><strong>Safe‑zone UI:</strong> Every slider shows a live safe band and textual reason (e.g., fixed‑MVA current limit or voltage headroom at the filter), and the error indicator highlights any violation.</li>
       </ul>
     </section>
 
     <section>
       <h3>Demonstration</h3>
-      <p>Live GUI interaction: parameter edits → safe‑zone updates → waveform & P–Q refresh. Replace the file path with your own if needed.</p>
+      <p>
+        The clip below shows the live workflow: editing parameters updates safe zones, waveforms, and the P–Q plane; power‑factor toggling switches between lagging/leading; the boundary preview exports data and charts.
+      </p>
       <video controls preload="metadata" poster="media/mmc-demo-poster.jpg">
         <source src="media/mmc-demo.mp4" type="video/mp4" />
         Your browser does not support the video tag. <a href="media/mmc-demo.mp4">Download the demo</a>.
       </video>
       <div class="inline-images">
-        <img src="mmc-pq.jpg" alt="P–Q Operating Plane" class="method-img">
-        <img src="mmc-waveforms.jpg" alt="MMC Waveforms" class="method-img">
-        <img src="mmc-capacitor.jpg" alt="SM Capacitor Ripple" class="method-img">
+        <img src="mmc-pq.jpg" alt="P–Q Operating Plane with voltage‑ and current‑limited segments" class="method-img">
+        <img src="mmc-waveforms.jpg" alt="Representative grid and arm waveforms from the solver" class="method-img">
+        <img src="mmc-capacitor.jpg" alt="Submodule capacitor ripple visualization" class="method-img">
       </div>
     </section>
   </main>
